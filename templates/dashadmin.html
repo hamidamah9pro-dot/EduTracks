@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tableau de bord</title>
+    <link rel="stylesheet" href="style admin.css">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    border: none;
+    outline: none;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+body{
+    display: flex;
+}
+.sidebar{
+    position: sticky;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100px;
+    height: 100vh;
+    padding: 10 1.7rem;
+    color: black;
+    transition: all 0.5s linear;
+    background-color:#2A4B9B;
+
+}
+.sidebar:hover{
+    width: 300px;
+    transition: 0.5s;
+}
+
+.logo{
+    height: 80px;
+    padding: 16px;
+}
+.menu{
+    height: 88%;
+    position: relative;
+    list-style: none;
+    padding: 0;
+}
+.menu li{
+    padding:1rem ;
+    margin: 5px ;
+    border-radius: 8px;
+    transition: all 0.5s ease-in-out;
+}
+.menu li :hover ,
+.active{
+    background:#ffff;
+    border-radius: 20px; 
+    padding: 5px;
+}
+
+.menu a{
+  color:  black;
+  font-size:100%;
+  text-decoration: none;
+  display: flex;
+  align-items:center ;
+  gap: 1.1rem;
+}
+
+.menu a span{
+   overflow: hidden;
+}
+.menu a i{
+    font-size: 1.4rem;
+}
+
+.sortie{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+}
+
+/* **** main body section**** */
+.main--content{
+    position: relative;
+    background: #ebe9e9;
+    width: 100%;
+    padding:1rem;
+}
+.header--wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #fff;
+    border-radius:10px ;
+    padding: 10px 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+}
+.header--title{
+    color:#231651 ;
+}
+.user--info{
+    display: flex;
+    align-items: center;
+    gap: 1rem ;
+}
+
+.recherche--box{
+    border-radius: 15px;
+    background: #ebe9e9;
+    color: rgba(113,99,186,255);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 10px 10px;
+    
+}
+.recherche--box input{
+    background: transparent;
+    padding: 4px;
+}
+.recherche--box i{
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.5s ease ease-in-out;
+}
+.recherche--box i :hover{
+    transform: scale(1.2);
+}
+
+/* **** card -- container**** */
+.card--container{
+    background: #ffff;
+    padding: 2rem;
+    border-radius: 10px;
+}
+.card--wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4rem;
+}
+
+.main--title {
+    color: white;
+    padding-bottom: 10px;
+    font-size: 15px;
+    margin: 20px;
+}
+.payement--card{
+    background: rgb(229,223,223);
+    border-radius: 10px;
+    padding: 1.2rem;
+    width:290px ;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.5s ease-in-out;
+}
+
+.payement--card:hover{
+    transform: translateY(-5px);
+}
+.card--header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.ammount{
+    display: flex;
+    flex-direction: column;
+}
+.title{
+    font-size: 12px;
+    font-weight: 200;
+    color: #fff;
+}
+.armout-presence{
+    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 600;
+    color: #fff;
+
+}
+
+.icon{
+    color:#fff;
+    padding: 1rem;
+    height: 6Opx;
+    width: 60px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    background: red;
+}
+
+.card--detail{
+    font-size: 18px;
+    color: #777777;
+    letter-spacing: 2px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* color css*/
+.lifht-blue{
+    background: #2A4B9B;
+}
+
+.lifht-blue{
+    background: #2A4B9B;
+
+}
+
+
+.lifht-blue{
+    background: #2A4B9B;
+}
+
+
+
+
+/* ****tabular--wrapper****/
+.tabular--wrapper{
+    background: #fff;
+    margin-top: 1rem;
+    border-radius: 10px;
+}
+
+.table-container{
+    width: 100%;
+}
+
+table{
+    width: 100%;
+    border-collapse: collapse;
+
+}
+thead{
+    background: rgba(113,99,186,255);
+    color: #fff;
+
+}
+
+th{
+    padding: 15px;
+    text-align: left;
+
+
+}
+
+tbody{
+    background: #f2f2f2f2;
+
+}
+
+td{
+    padding: 15px;
+    font-size: 14px;
+    color: #333;
+}
+
+tr:nth-child(even){
+    background: #fff;
+
+}
+tfoot{
+    background: #2A4B9B;
+    font-weight: bold;
+    color: #fff;
+}
+
+tfoot td{
+    padding: 15px;
+    color: #f2f2f2f2;
+}
+
+.table-container button{
+    color: rgb(226, 20, 13);
+    background: none;
+    cursor: pointer;
+}
+a.sm{
+    padding-bottom: 6%;
+}
+.smenu{
+    display: none;
+}
+.sm:hover ~ .smenu, .sm:focus ~ .smenu{
+    display: block;
+}
+    </style>
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo"></div>
+            <ul class="menu">
+          <li class="active">
+                <a href="#" >
+                    <i class="fa-solid fa-gauge-simple-high"></i>
+                    <span>dashbload</span>
+                </a>
+            </li>
+             <li >
+                <a class="sm"  href="#">
+                  <i class="fa-solid fa-graduation-cap"></i>
+                    <span >Etudians</span>
+                   
+                </a>
+                <ul class="smenu">
+                        <li><a href="">Informatique/Genie Informatique</a></li>
+                        <li><a href="">Informatique/Miage</a></li>
+                        <li><a href="">Droit</a></li>
+                        <li><a href="">Mathématique Appliqué</a></li>
+                        <li><a href="">Communication</a></li>
+                        <li><a href="">Genie Civil</a></li>
+                    </ul>
+            </li> 
+            
+             <li>
+                <a href="statistique.html">
+                 <i class="fa-solid fa-chart-simple"></i>
+                    <span>statistiques</span>
+                </a>
+            </li>
+
+             <li>
+                <li>
+                    <a href="../acceuil.html">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>sortie</span>
+                    </a>
+        </li>
+
+            </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <span></span>
+                <h2></h2>
+            </div>
+            <div class="user info">
+                <div class="recherche--box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="recherche">
+            </div>
+            </div>
+            </div>
+
+
+            <div class="card--container">
+                <h3 class="main--title">Aujourd'hui</h3> 
+                <div class="card--wrapper">
+                <div class="payement--card lifht-blue">
+                    <div class="card--hearder">
+                        <div class="ammount">
+                            <span class="title">absence</span>
+                            <span class="armout-presence"> presence</span>
+                        </div>
+                    </div>
+                    <span class="card--detail">Echelle</span>
+                </div>
+                  <div class="payement--card lifht-blue">
+                    <div class="card--hearder">
+                        <div class="ammount">
+                            <span class="title">absence</span>
+                            <span class="armout-presence"> presence</span>
+                        </div>
+                    </div>
+                    <span class="card--detail">Echelle</span>
+                </div>
+                 <div class="payement--card lifht-blue">
+                    <div class="card--hearder">
+                        <div class="ammount">
+                            <span class="title">absence</span>
+                            <span class="armout-presence"> presence</span>
+                        </div>
+                    </div>
+                    <span class="card--detail">Echelle</span>
+                </div>
+
+            </div>
+            </div>
+            <div class="tabular--wrapper">
+                <h3 class="main--title">semaine passé</h3>
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Nom</th>
+                                <th>Prenom</th>
+                                <th>Matricule</th>
+                                <th>Email</th>
+                                <th>Niveau</th>
+                                <th>Filiere</th>                                     
+                                <th>matin</th>  
+                                <th>soir</th>  
+                                <th>Prof</th>                             
+                            </tr>
+                            <tbody>
+                                {% for e in  eleves  %}
+                                <tr>
+                                    <td>  </td>
+                                    <td> {{ e.nom }} </td>
+                                    <td> {{ e.prenom }} </td>
+                                    <td> {{ e.matricule }} </td>
+                                    <td> {{ e.email }} </td>
+                                    <td> {{ e.niveau }} </td>
+                                    <td> {{e.filiere}} </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td> </td>
+                                    
+                                </tr>
+                                {% endfor %}
+
+                            </tbody>
+                            <tfoot> 
+                                <tr>
+                                    <td colspan="9">total:Etudiant Absents</td>
+                                </tr>
+                                </tr>
+                                <tr></tr>
+                                <td colspan="9">total:Etudiant presents</td>
+                                </tr>
+                            </tfoot>
+                        </thead>
+                    </table>
+                </div>
+
+                </div>
+
+        </div>
+        </div>
+    </div>
+</body>
+</html>

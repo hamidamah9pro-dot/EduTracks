@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashetu.css') }}">
+    <title>TABLEAU DE BORD</title>
+</head>
+<body>
+    <div class="left">
+        <div class="account">
+            <i id="account" class="fa-solid fa-circle-user"></i>
+            <div class="acc">
+                <h1> {{ etu_nom }} {{ etu_prenom }} </h1>
+                <h2> {{ etu_mat }} </h2>
+            </div>
+        </div>
+        <div class="exit">
+            <button><a href="{{ url_for('conetu') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>SE DECONNECTER</a></button>
+        </div>
+    </div>
+    <div class="right">
+        <div class="rights">
+        <div class="top">
+            <div class="sec1">
+            <div class="titres">
+                <h1>Bonjour, {{etu_prenom}} </h1>
+            <p> {{date}} </p>
+            </div>
+           
+            
+        </div>
+        <span class="separateur"></span>
+    </div>
+            <span id="barre"></span>
+            <div class="grids">
+    <div class="div1">
+        <h1>PRESENCE HEBDOMADAIRE</h1>
+        <p style="font-size: 7em;"> {{ result.presences }} </p><p>jours</p>
+    </div>
+    <div class="div2">
+        <h1>ABSENCE HEBDOMADAIRE</h1>
+        <p style="font-size: 7em;"> {{ result.absences }} </p><p>jours</p>
+    </div>
+    <div class="div3">
+        <h1>FLAMME</h1>
+        <p style="font-size: 7em;" id="streakCount">{{ use.flame }}</p> <p>    jours</p></div>
+</div>
+
+</div>
+<div class="bottom" id="Stat">
+    <h1>L1 - GENIE INFORMATIQUE</h1>
+     <div class="gridstat">
+    <div class="divs1">
+        <h1>NOMBRE TOTAL</h1>
+        <p style="font-size: 4em;"> {{ total.total_etudiants }} </p><p>jours</p>
+    </div>
+    <div class="divs2">
+        <h1>PRESENCE HEBDOMADAIRE</h1>
+        <p style="font-size: 4em;"> {{ resulth.presences }} </p><p>jours</p>
+    </div>
+    <div class="divs2">
+        <h1>PRESENCE MENSUELLE</h1>
+        <p style="font-size: 4em;" id="streakCount">{{ total_mois.total_presents }}</p> jours
+    </div>
+</div>
+</div>
+<div class="ending" id="infos">
+    {% for i in infos%}
+    <div class="prt"> 
+        <div class="cont">
+        <div class="chld1">
+            {{ i.date }}
+        </div>
+        <div class="chld2">
+            {{ i.titre }}
+        </div>
+    </div>
+        <div class="chld3">
+            {{ i.messages }}
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+</div>
+
+</body>
+</html>

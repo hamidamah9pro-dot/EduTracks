@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='conetu.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <div class="fond"><img src="{{ url_for('static', filename='back.jpeg') }}" alt=""></div>
+    <div class="container">
+        <div class="form-box loging">
+            <div class="form-box loging">
+            <form method="POST" action="/connexionetu" >
+                <h1>RAVIS DE VOUS REVOIR!</h1>
+                <div class="input-box">
+                  <input type="Email" placeholder="Email iua" required name="email">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="input-box">
+                  <input type="text" placeholder="Matricule" required name="matricule">
+                  <i class="fa-solid fa-lock"></i>
+                </div>
+                <button type="submit" class="btn" value="submit" name="ok" >Se connecter</button>
+
+                <p>Pas de compte ? <a href="{{ url_for('inscrietud') }}">S'inscrire</a></p>
+            </form>
+        </div>
+        </div>
+    </div>
+    <div class="returnb">
+        <a href="{{ url_for('bienvenue') }}"><i class="fa-solid fa-arrow-left-long"></i></a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='ss.css') }}">
+    <title>SCHOOL PORTAL</title>
+</head>
+<body>
+    <div class="body">
+        <div class="left">
+            <div class="title">
+                <h1>EduTrack</h1>
+                <p>Bienvenue sur la plateforme d'enregistrement des présences, de gestion et d'annonces Universitaire<br>
+                    Sécurité et Fiabilité a 100%
+                </p>
+               
+            </div>
+            <div class="img">
+                 <img src="{{ url_for('static', filename='back.jpeg') }}" alt="imghero">
+            </div>
+        </div>
+        <div class="right">
+            <div class="form">
+                <h1>CHOISISSEZ UN PORTAIL !</h1>
+                <button style="background-color: #2d7bda;"><a href="{{ url_for('conetu') }}"><i class="fa-solid fa-graduation-cap"></i>   ETUDIANTS</a></button>
+                <button style="background-color: #2A4B9B;"><a href="{{ url_for('conprof') }}"><i class="fa-solid fa-user-tie"></i>  PROFESSEURS</a></button>
+                <button style="background-color: #231651;"><a href="{{ url_for('conadmin') }}"><i class="fa-solid fa-school-lock"></i>  ADMINISTRATEUR</a></button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

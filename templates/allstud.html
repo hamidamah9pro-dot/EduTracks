@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fiche de pointage - {{ filiere }} {{ niveau }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='fille.jpg') }}">
+                <h1>{{ session.prof_nom }} {{ session.prof_prenom }}</h1>
+            </div>
+           
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="title"> 
+            <h1>FICHE DE POINTAGE</h1> <div class="fonction">Génie Informatique</div>
+            <h2>{{ filiere }} - {{ niveau }}</h2>
+        </div>
+        <div class="subtitle">
+            <p>{{ date }}</p>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Matricule</th>
+                <th>Matin (8h-10h / 10h-12h)</th>
+                <th>Soir (14h-16h / 16h-18h)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for id, etudiant in gesteleve.items() %}
+            <tr>
+                <td>{{ etudiant.nom }}</td>
+                <td>{{ etudiant.prenom }}</td>
+                <td>{{ etudiant.matricule }}</td>
+                
+                <td>
+                    <button 
+                        class="btn-presence {% if etudiant.matin1 == 'present' %}active-present{% elif etudiant.matin1 == 'absent' %}active-absent{% endif %}"
+                        data-creneau="matin1" 
+                        data-id="{{ etudiant.ID }}" 
+                        onclick="validpres(this, 'present')">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button 
+                        class="btn-absence {% if etudiant.matin2 == 'absent' %}active-absent{% endif %}"
+                        data-creneau="matin2" 
+                        data-id="{{ etudiant.ID }}" 
+                        onclick="validpres(this, 'absent')">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </td>
+                
+                <!-- Créneaux du soir -->
+                <td>
+                    <button 
+                        class="btn-presence {% if etudiant.soir1 == 'present' %}active-present{% endif %}"
+                        data-creneau="soir1" 
+                        data-id="{{ etudiant.ID }}" 
+                        onclick="validpres(this, 'present')">
+                        <i class="fa-solid fa-check"></i>
+                    </button>
+                    <button 
+                        class="btn-absence {% if etudiant.soir2 == 'absent' %}active-absent{% endif %}"
+                        data-creneau="soir2" 
+                        data-id="{{ etudiant.ID }}" 
+                        onclick="validpres(this, 'absent')">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center; padding: 20px;">
+                    Aucun étudiant trouvé pour {{ filiere }} - {{ niveau }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function validpres(button, statut) {
+            const etudiantId = button.getAttribute('data-id');
+            const creneau = button.getAttribute('data-creneau');
+            
+          
+            fetch('/valider_flamme', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `etudiant_id=${etudiantId}&creneau=${creneau}&statut=${statut}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Ajouter une classe CSS pour feedback visuel
+                    button.classList.add(statut === 'present' ? 'active-present' : 'active-absent');
+                    
+                    // Retirer la classe de l'autre bouton du même créneau
+                    const parentTd = button.parentElement;
+                    const otherButtons = parentTd.querySelectorAll('button');
+                    otherButtons.forEach(btn => {
+                        if (btn !== button) {
+                            btn.classList.remove('active-present', 'active-absent');
+                        }
+                    });
+                    
+                    console.log('Présence validée avec succès');
+                } else {
+                    alert('Erreur lors de la validation');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Erreur de connexion au serveur');
+            });
+        }
+    </script>
+</body>
+</html>

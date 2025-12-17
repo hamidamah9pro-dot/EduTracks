@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="style admin.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+}
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 260px;
+    background: #2d7bda;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.sidebar .logo {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
+
+.sidebar .logo h2 {
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar .menu li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar .menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar .menu li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.sidebar .menu li a i {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.sidebar .menu li a span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.smenu {
+    list-style: none;
+    padding-left: 40px;
+    margin-top: 10px;
+    display: none;
+}
+
+.smenu li {
+    margin-bottom: 5px;
+}
+
+.smenu li a {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.smenu li a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .menu li:hover .smenu {
+    display: block;
+}
+
+.prcont {
+    margin-left: 26%;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+.heaper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.htitle span {
+    color: #667eea;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.htitle h2 {
+    font-size: 28px;
+    color: #2d3436;
+    margin-top: 5px;
+}
+
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50% 0;
+    color: white;
+}
+.u{
+    font-size: 3em;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 20px;
+}
+.rechebox {
+    position: relative;
+}
+
+.rechebox i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.rechebox input {
+    padding: 12px 20px 12px 45px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    width: 300px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.rechebox input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.1);
+}
+
+.cartecont {
+    margin-bottom: 30px;
+}
+
+.maintle {
+    font-size: 20px;
+    color: #2d3436;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.carteper {
+    display: flex;
+    gap: 20px;
+}
+
+.divi {
+    background: white;
+    padding: 25px;
+    width: 20em;
+    margin-bottom: 3%;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid;
+}
+
+.divi:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.blcl {
+    border-left-color: #3498db;
+}
+
+.vrcl {
+    border-left-color: #2ecc71;
+}
+
+.orcl {
+    border-left-color: #d26c19;
+}
+
+.carthead {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.cc .title {
+    display: block;
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.cc1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.card-icon {
+    font-size: 40px;
+    opacity: 0.3;
+}
+
+.blcl .card-icon {
+    color: #3498db;
+}
+
+.vrcl .card-icon {
+    color: #2ecc71;
+}
+
+.orcl .card-icon {
+    color: #d26c19;
+}
+.cardetail {
+    font-size: 13px;
+    color: #95a5a6;
+}
+
+.tabwrap {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead {
+   background: #667eea;
+}
+
+table thead tr th {
+    padding: 15px;
+    text-align: left;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #ecf0f1;
+    transition: 0.3s ease;
+}
+
+table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+table tbody tr td {
+    padding: 15px;
+    font-size: 14px;
+    color: #2d3436;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status.present {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.absent {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+table tfoot {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+table tfoot tr td {
+    padding: 15px;
+    color: #2d3436;
+}
+
+.total-row {
+    font-size: 14px;
+    color: #555;
+}
+
+.total-row strong {
+    color: #667eea;
+    font-size: 16px;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#f1f5f9;
+    display:flex;
+    color:#1f2937;
+}
+
+.blue{background:#2563eb;}
+.green{background:#10b981;}
+.purple{background:#8b5cf6;}
+.orange{background:#f59e0b;}
+
+.container{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:25px;
+}
+.hero{
+    position: relative;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.06);
+    overflow: hidden;
+}
+.hero img{
+    object-fit: contain;
+    position: absolute;
+    width: 300px;
+    transform: translate(-1em, -1em);
+}
+.hero h3{
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+.activite{
+    display:flex;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    margin-top:7px;
+}
+
+.activite p{
+    font-size:15px;
+}
+
+.activite span{
+    font-size:13px;
+    color:#6b7280;
+}
+.progress-item{
+    margin-bottom:18px;
+}
+
+.progress-item p{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    margin-bottom:6px;
+}
+
+.progress{
+    background:#e5e7eb;
+    height:9px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    border-radius:10px;
+    animation:load 1s ease;
+}
+.espace{
+    margin-top: 10px;
+}
+
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 220px;
+    }
+    
+    .main--content {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        width: 70px;
+    }
+    
+    .sidebar .logo h2,
+    .sidebar .menu li a span {
+        display: none;
+    }
+    
+    .sidebar .menu li a {
+        justify-content: center;
+        padding: 15px;
+    }
+    
+    .sidebar .menu li a i {
+        margin-right: 0;
+    }
+    
+    .smenu {
+        display: none !important;
+    }
+    
+    .main--content {
+        margin-left: 70px;
+    }
+    
+    .header--wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .recherche--box input {
+        width: 100%;
+    }
+    
+    .card--wrapper {
+        grid-template-columns: 1fr;
+    }
+    .user h1, .user h3, .user h6{
+        display: none;
+    }
+    .user .u {
+        font-size: 1em;
+
+    }
+    .prcont{
+        margin-left: 15%;
+    }
+    .heaper{
+        width: 20em;
+    }
+    .carteper{
+        display: flex;
+        flex-direction: column;
+    }
+    .container{
+        display: flex;
+        flex-direction: column;
+    }
+    .cartecont{
+        position: fixed;
+    }
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Etudiants</h2>
+        </div> 
+        <div class="user">
+            <i class="fa-solid fa-user u"></i>
+            <h1> {{ etu_nom }} {{ etu_prenom }} </h1>
+            <h3> {{ etu_mat }} </h3>
+            <h6>Connecté</h6>
+        </div>
+        <ul class="menu">
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-gauge-simple-high"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="sm" href="#">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>Annonces</span>
+                </a>
+                
+            </li> 
+            <li>
+                <a href=" {{ url_for('logoutstud') }} ">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sortie</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="prcont">
+        <div class="heaper">
+            <div class="htitle">
+                <span>Bienvenue</span>
+                <h2>Tableau de Bord</h2>
+            </div>
+        </div>
+
+        <div class="cartecontr">
+            <h3 class="maintle">Aujourd'hui</h3> 
+            <div class="carteper">
+                <div class="divi blcl">
+                    <div class="carthead">
+                        <div class="cc">
+                            <span class="title">Absences</span>
+                            <span class="cc1">{{ result.absences }}</span>
+                        </div>
+                        <i class="fa-solid fa-user-xmark card-icon"></i>
+                    </div>
+                   
+                </div>
+
+                <div class="divi vrcl">
+                    <div class="carthead">
+                        <div class="cc">
+                            <span class="title">Présences</span>
+                            <span class="cc1">{{ result.presences }}</span>
+                        </div>
+                        <i class="fa-solid fa-user-check card-icon"></i>
+                    </div>
+                </div>
+
+                <div class="divi orcl">
+                    <div class="carthead">
+                        <div class="cc">
+                            <span class="title">Flamme</span>
+                            <span class="cc1">{{ use.flame }}</span>
+                        </div>
+                        <i class="fa-solid fa-fire card-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabwrap">
+            <h1>Annonces</h1>
+            <p>Aucune annonce disponible.</p>
+    </div>
+ <div class="espace"> 
+    <div class="container">
+        <div class="hero">
+            <img  src="{{ url_for('static', filename='cal.png') }}" alt="">
+        </div>
+        <div class="hero"><h3>Activités récentes & En cours</h3>
+
+            <div class="activite">
+                <div class="dot blue"></div>
+                <div>
+                    <p>Echappe Bleu</p>
+                    <span> Il ya 1 mois</span>
+                </div>
+            </div>
+
+            <div class="activite">
+                <div class="dot green"></div>
+                <div>
+                    <p>Arbre de Noel</p>
+                    <span>20 Decembre</span>
+                </div>
+            </div>
+
+            <div class="activite">
+                <div class="dot purple"></div>
+                <div>
+                    <p>Examen l1</p>
+                    <span>Retour des congées</span>
+                </div>
+            </div></div>
+            
+    </div>
+</div>
+    </div>
+    </div>
+
+    <script src="script admin.js"></script>
+</body>
+</html>

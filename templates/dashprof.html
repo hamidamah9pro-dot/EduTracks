@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+        <div class="container">
+        <div class="hero">
+            <div class="logo"><img src="fille.jpg">
+            </div>
+            <div class="fonction">Génie Informatique</div>
+            <div class="buton">
+                <button><a href="{{ url_for('L1', filiere='INFO') }}">L1</a></button>
+                <button><a href="{{ url_for('L2', filiere='INFO') }}">L2</a></button>
+                <button><a href="{{ url_for('L3', filiere='INFO') }}">L3</a></button>
+                <button><a href="{{ url_for('M1', filiere='INFO') }}">M1</a></button>
+                <button><a href="{{ url_for('M2', filiere='INFO') }}">M2</a></button>
+            </div>
+            <button class="btr">Enregistrer</button>
+        <button class="btr">Exporter</button>
+        </div>
+        
+    
+</body>
+</html>

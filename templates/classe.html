@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>prof</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    {% include 'dashprof.html' %}
+        <div class="subtitle">
+            pCours du matin · 12 Decembre 2025 <br>
+            Niveau : L1 — Salle : A-12 — Prof : DD.
+        </div>
+        <table>
+                <tr>
+                    <th>N°</th>
+                    <th>PHOTO</th>
+                    <th>NOM</th>
+                    <th>PRENOMS</th>
+                    <th>MATRICULE</th>
+                    <th>PRESENT(E)</th>
+                    <th>ABSENT(E)</th>
+                </tr>
+                {% for eleve in gesteleve %}
+                <tr>
+                    <td>{{ eleve.ID }}</td>
+                    <td><img src=""></td>
+                    <td>{{ eleve.nom }}</td>
+                    <td>{{ eleve.prenom }}</td>
+                    <td>{{ eleve.matricule }}</td>
+                    <td>
+                        <form action="/l1" method="POST">
+                        <input type="hidden" name="statut" value="1">
+                        <button><i class="fa-solid fa-check"></i></button>
+                        </form>
+                    </td>
+                    <td>
+                        <form action="/l1" method="POST">
+                        <input type="hidden" name="statut" value="0">
+                        <button><i class="fa-solid fa-xmark"></i></button>
+                        </form>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+            </table>
+</body>
+</html>

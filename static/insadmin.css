@@ -1,0 +1,130 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color:rgb(234, 234, 234);
+    overflow: hidden;
+}
+body .fond{
+    position: absolute;
+    z-index: 0;
+    height: 100vh;
+    overflow: hidden;
+    z-index: 0;
+}
+body .fond img{
+    width: 96em;
+    opacity: 20%;
+    height: 100vh;
+    object-fit: cover;
+    overflow: hidden;
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+    height: 200px;
+    border-radius: 30px;
+    z-index: 1;
+
+}
+
+.container h1{
+    font-size: 36px;
+}
+
+.container p{
+    font-size: 14.4px;
+    margin: 15px 0;
+}
+
+form{
+    width: 100%;
+}
+
+.form-box{
+   display: flex;
+   align-items: center;
+   color: #333;
+   padding: 30px ;
+   text-align: center;
+   border-radius: 80px;
+   background: #f6f6f6;
+}
+
+.input-box{
+    position: relative;
+    margin: 30px 0;
+}
+.input-box input{
+    width: 25em;
+    padding: 1em 3em;
+    background: #eee;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    font-weight: 500;
+    justify-content: center;
+
+}
+.input-box I{
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    font-size: 20px;
+}
+
+
+.forgot-link a{
+    font-size: 50px;
+    color: #333;
+}
+
+.btn{
+    width:50%;
+    height: 40px;
+    background: #7494ec;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 20px;
+    color: #fff;
+    font-weight: 600;
+    transition: 0.5s;
+}
+.btn:hover{
+    transform: scale(1.2);
+}
+
+.returnb{
+    background-color: #fff;
+    position: absolute;
+    z-index: 3;
+    padding: 1%;
+    border-radius: 30px;
+    transform: translate(-40em, -20em);
+}
+.returnb i{
+    color: black;
+}
+
+
+
+
+
+
+

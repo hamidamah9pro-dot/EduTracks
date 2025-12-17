@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de bord</title>
+    <link rel="stylesheet" href="style admin.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+    color: #333;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 260px;
+    background: #231651;
+    padding: 20px;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.sidebar .logo {
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+}
+.user{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 50% 0;
+    color: white;
+}
+.u{
+    font-size: 3em;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 20px;
+}
+.sidebar .logo h2 {
+    color: white;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.sidebar .menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar .menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar .menu li a {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.sidebar .menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar .menu li.active a {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.sidebar .menu li a i {
+    margin-right: 15px;
+    font-size: 18px;
+}
+
+.sidebar .menu li a span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+
+.smenu {
+    list-style: none;
+    padding-left: 40px;
+    margin-top: 10px;
+    display: none;
+}
+
+.smenu li {
+    margin-bottom: 5px;
+}
+
+.smenu li a {
+    padding: 10px 15px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.smenu li a:hover {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .menu li:hover .smenu {
+    display: block;
+}
+
+.main--content {
+    margin-left: 26%;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+.header--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.header--title span {
+    color: #667eea;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.header--title h2 {
+    font-size: 28px;
+    color: #2d3436;
+    margin-top: 5px;
+}
+
+.recherche--box {
+    position: relative;
+}
+
+.recherche--box i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.recherche--box input {
+    padding: 12px 20px 12px 45px;
+    border: 1px solid #e0e0e0;
+    border-radius: 25px;
+    width: 300px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.recherche--box input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 10px rgba(102, 126, 234, 0.1);
+}
+
+.card--container {
+    margin-bottom: 30px;
+}
+
+.main--title {
+    font-size: 20px;
+    color: #2d3436;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.card--wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.payement--card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid;
+}
+
+.payement--card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.15);
+}
+
+.light-blue {
+    border-left-color: #3498db;
+}
+
+.light-green {
+    border-left-color: #2ecc71;
+}
+
+.light-purple {
+    border-left-color: #9b59b6;
+}
+
+.card--header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+}
+
+.amount .title {
+    display: block;
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.amount-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.card-icon {
+    font-size: 40px;
+    opacity: 0.3;
+}
+
+.light-blue .card-icon {
+    color: #3498db;
+}
+
+.light-green .card-icon {
+    color: #2ecc71;
+}
+
+.light-purple .card-icon {
+    color: #9b59b6;
+}
+
+.card--detail {
+    font-size: 13px;
+    color: #95a5a6;
+}
+
+.tabular--wrapper {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+}
+
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table thead {
+   background: #231651;
+}
+
+table thead tr th {
+    padding: 15px;
+    text-align: left;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #ecf0f1;
+    transition: background 0.3s ease;
+}
+
+table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+table tbody tr td {
+    padding: 15px;
+    font-size: 14px;
+    color: #2d3436;
+}
+
+.status {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status.present {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.absent {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+table tfoot {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+table tfoot tr td {
+    padding: 15px;
+    color: #2d3436;
+}
+
+.total-row {
+    font-size: 14px;
+    color: #555;
+}
+
+.total-row strong {
+    color: #667eea;
+    font-size: 16px;
+}
+
+*{
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#f1f5f9;
+    display:flex;
+    color:#1f2937;
+}
+
+.blue{background:#2563eb;}
+.green{background:#10b981;}
+.purple{background:#8b5cf6;}
+.orange{background:#f59e0b;}
+
+.container{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    gap:25px;
+}
+.hero{
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 15px 30px rgba(0,0,0,0.06);
+}
+
+.hero h3{
+    font-size:18px;
+    margin-bottom:20px;
+}
+
+.activite{
+    display:flex;
+    gap:15px;
+    margin-bottom:18px;
+}
+
+.dot{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    margin-top:7px;
+}
+
+.activite p{
+    font-size:15px;
+}
+
+.activite span{
+    font-size:13px;
+    color:#6b7280;
+}
+.progress-item{
+    margin-bottom:18px;
+}
+
+.progress-item p{
+    display:flex;
+    justify-content:space-between;
+    font-size:14px;
+    margin-bottom:6px;
+}
+
+.progress{
+    background:#e5e7eb;
+    height:9px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress div{
+    height:100%;
+    border-radius:10px;
+    animation:load 1s ease;
+}
+.espace{
+    margin-top: 10px;
+}
+
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 220px;
+    }
+    
+    .main--content {
+        margin-left: 220px;
+    }
+}
+
+@media (max-width: 768px) {
+    
+    .sidebar {
+        width: 20%;
+    }
+    
+    .sidebar .logo h2,
+    .sidebar .menu li a span {
+        display: none;
+    }
+    
+    .sidebar .menu li a {
+        justify-content: center;
+        padding: 15px;
+    }
+    
+    .sidebar .menu li a i {
+        margin-right: 0;
+    }
+    
+    .smenu {
+        display: none !important;
+    }
+    
+    .main--content {
+        margin-left: 70px;
+    }
+    
+    .header--wrapper {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .recherche--box input {
+        width: 100%;
+    }
+    
+    .card--wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+}
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <h2>Adminstration</h2>
+              <div class="user">
+            <i class="fa-solid fa-user u"></i>
+            <h1> ADMIN </h1>
+            <h6>Connecté</h6>
+        </div>
+        </div> 
+        <ul class="menu">
+            <li class="active">
+                <a href="#">
+                    <i class="fa-solid fa-gauge-simple-high"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a class="sm" href="#">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>information</span>
+                </a>
+                
+            </li> 
+            <li>
+                <a href=" {{ url_for('logoutad') }} ">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                    <span>Sortie</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="main--content">
+        <div class="header--wrapper">
+            <div class="header--title">
+                <span>Bienvenue</span>
+                <h2>Tableau de Bord</h2>
+            </div>
+            <div class="user-info">
+                <div class="recherche--box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Recherche">
+                </div>
+            </div>
+        </div>
+
+        <div class="card--container">
+            <h3 class="main--title">Aujourd'hui</h3> 
+            <div class="card--wrapper">
+                <div class="payement--card light-blue">
+                    <div class="card--header">
+                        <div class="amount">
+                            <span class="title">Absences</span>
+                            <span class="amount-number">{{ total.total_absents or 0 }}</span>
+                        </div>
+                        <i class="fa-solid fa-user-xmark card-icon"></i>
+                    </div>
+                    <span class="card--detail">Étudiants absents</span>
+                </div>
+
+                <div class="payement--card light-green">
+                    <div class="card--header">
+                        <div class="amount">
+                            <span class="title">Présences</span>
+                            <span class="amount-number"> {{ total.total_presents or 0 }}</span>
+                        </div>
+                        <i class="fa-solid fa-user-check card-icon"></i>
+                    </div>
+                    <span class="card--detail">Étudiants présents</span>
+                </div>
+
+                <div class="payement--card light-purple">
+                    <div class="card--header">
+                        <div class="amount">
+                            <span class="title">Total</span>
+                            <span class="amount-number">{{ totaux.total_etudiants }}</span>
+                        </div>
+                        <i class="fa-solid fa-users card-icon"></i>
+                    </div>
+                    <span class="card--detail">Total étudiants</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="tabular--wrapper">
+            <h3 class="main--title">Fiche de Pointage</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Nom</th>
+                            <th>Prénom</th>
+                            <th>Matricule</th>
+                            <th>Email</th>
+                            <th>Niveau</th>
+                            <th>Filière</th>                                     
+                            <th>Creneau</th>  
+                            <th>Statut</th>                             
+                        </tr>
+                    </thead>
+                    <tbody>
+                          {% for p in presences %}
+                                <tr>
+                                    <td>{{ p.date }}</td>
+                                    <td>{{ p.nom_etudiant }}</td>
+                                    <td>{{ p.prenom_etudiant }}</td>
+                                    <td>{{ p.matricule }}</td>
+                                    <td>{{ p.email }}</td>
+                                    <td>{{ p.niveau }}</td>
+                                    <td>{{ p.filiere }}</td>
+                                    <td>{{ p.creneau }}</td>
+                                    <td>{{ p.statut }}</td>
+                                </tr>
+                            {% else %}
+            <tr>
+                <td colspan="11">Aucune présence enregistrée</td>
+            </tr>
+            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+    </div>
+ <div class="espace"> 
+    <div class="container">
+        <div class="hero">
+            <h3>Activités récentes & En cours</h3>
+
+            <div class="activite">
+                <div class="dot blue"></div>
+                <div>
+                    <p>Echappe Bleu</p>
+                    <span> Il ya 1 mois</span>
+                </div>
+            </div>
+
+            <div class="activite">
+                <div class="dot green"></div>
+                <div>
+                    <p>Arbre de Noel</p>
+                    <span>20 Decembre</span>
+                </div>
+            </div>
+
+            <div class="activite">
+                <div class="dot purple"></div>
+                <div>
+                    <p>Examen l1</p>
+                    <span>Retour des congées</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero">
+            <h3>Filières</h3>
+            <div class="progress-item">
+                <p><span>Informatique/Génie Informatique</span><span>8 étudiants</span></p>
+                <div class="progress"><div class="blue" style="width:100%"></div></div>
+            </div>
+            <div class="progress-item">
+                <p><span>Informatique/ Miage</span><span>0 étudiants</span></p>
+                <div class="progress"><div class="green" style="width:0%"></div></div>
+            </div>
+            <div class="progress-item">
+                <p><span>Génie Civil</span><span>0 étudiants</span></p>
+                <div class="progress"><div class="purple" style="width:0%"></div></div>
+            </div>
+            <div class="progress-item">
+                <p><span>Communication</span><span>0 étudiants</span></p>
+                <div class="progress"><div class="orange" style="width:0%"></div></div>
+            </div>
+            <div class="progress-item">
+                <p><span>Droit</span><span>0 étudiants</span></p>
+                <div class="progress"><div class="green" style="width:0%"></div></div>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    </div>
+
+    <script src="script admin.js"></script>
+</body>
+</html>
