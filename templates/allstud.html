@@ -106,10 +106,9 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    // Ajouter une classe CSS pour feedback visuel
+                   
                     button.classList.add(statut === 'present' ? 'active-present' : 'active-absent');
                     
-                    // Retirer la classe de l'autre bouton du même créneau
                     const parentTd = button.parentElement;
                     const otherButtons = parentTd.querySelectorAll('button');
                     otherButtons.forEach(btn => {

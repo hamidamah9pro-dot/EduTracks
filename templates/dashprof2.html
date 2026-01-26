@@ -536,14 +536,14 @@ table tfoot tr td {
                 <td>
                     <button 
                         class="btn-presence {% if etudiant.matin1 == 'present' %}active-present{% elif etudiant.matin1 == 'absent' %}active-absent{% endif %}"
-                        data-creneau="matin1" 
+                        data-creneau="matin1"  id="snd1"
                         data-id="{{ etudiant.ID }}" 
                         onclick="validpres(this, 'present')">
                         <i class="fa-solid fa-check"></i>
                     </button>
                     <button 
                         class="btn-absence {% if etudiant.matin2 == 'absent' %}active-absent{% endif %}"
-                        data-creneau="matin2" 
+                        data-creneau="matin2" id="snd2"
                         data-id="{{ etudiant.ID }}" 
                         onclick="validpres(this, 'absent')">
                         <i class="fa-solid fa-xmark"></i>
@@ -552,14 +552,14 @@ table tfoot tr td {
                 <td>
                     <button 
                         class="btn-presence {% if etudiant.soir1 == 'present' %}active-present{% endif %}"
-                        data-creneau="soir1" 
+                        data-creneau="soir1" id="snd3"
                         data-id="{{ etudiant.ID }}" 
                         onclick="validpres(this, 'present')">
                         <i class="fa-solid fa-check"></i>
                     </button>
                     <button 
                         class="btn-absence {% if etudiant.soir2 == 'absent' %}active-absent{% endif %}"
-                        data-creneau="soir2" 
+                        data-creneau="soir2" id="snd4"
                         data-id="{{ etudiant.ID }}" 
                         onclick="validpres(this, 'absent')">
                         <i class="fa-solid fa-xmark"></i>
@@ -617,6 +617,40 @@ table tfoot tr td {
                 alert('Erreur de connexion au serveur');
             });
         }
+let snd1 = document.getElementById("snd1");
+let snd2 = document.getElementById("snd2");
+let snd3 = document.getElementById("snd3");
+let snd4 = document.getElementById("snd4");
+
+
+snd1.addEventListener("click", function() {
+    snd1.style.backgroundColor = "green";
+    snd1.textContent = "Present";
+    snd1.style.color = "white";
+    snd1.style.padding = "5px";
+    snd2.style.display = "none";
+});
+snd2.addEventListener("click", function() {
+    snd2.style.backgroundColor = "red";
+    snd2.textContent = "Absent";
+    snd2.style.color = "white";
+    snd2.style.padding = "5px";
+    snd1.style.display = "none";
+});
+snd3.addEventListener("click", function() {
+    snd3.style.backgroundColor = "green";
+    snd3.textContent = "Present";
+    snd3.style.color = "white";
+    snd3.style.padding = "5px";
+    snd4.style.display = "none";
+});
+snd4.addEventListener("click", function() {
+    snd4.style.backgroundColor = "red";
+    snd4.textContent = "Absent";
+    snd4.style.color = "white";
+    snd4.style.padding = "5px";
+    snd3.style.display = "none";
+});
     </script>
 </body>
 </html>

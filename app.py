@@ -7,7 +7,7 @@ import datetime
 app = Flask(__name__)
 app.secret_key = "130399"
 
-# Configuration MySQL
+
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
@@ -16,13 +16,11 @@ app.config['MYSQL_DB'] = 'hacks'
 mysql = MySQL(app)
 
 
-# PAGE D'ACCUEIL
 @app.route('/')
 def bienvenue():
     return render_template("bienvenue.html")
 
 
-# CONNEXIONS
 
 @app.route('/conetu')
 def conetu():
@@ -48,17 +46,15 @@ def connexionetu():
     cur.execute("SELECT * FROM gesteleve WHERE email = %s", (email,))
     etu = cur.fetchone()
 
-    # Email inexistant
     if etu is None:
         cur.close()
         return "Email introuvable"
 
-    # Matricule incorrect
+    
     if etu['matricule'] != matricule:
         cur.close()
         return "Matricule incorrect"
 
-    # Calcul de la flamme
     today = date.today()
     last_login = etu['last_login']
     flame = etu['flame']
